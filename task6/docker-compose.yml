@@ -1,15 +1,19 @@
 services:
   back-end:
     build: ./back-end
-    # Запускаем сразу 2 копии бэкенда
-    deploy:
-      replicas: 2
     image: softy-pinko-back-end:task6
 
-  front-end:
+  front-server:
     build: ./front-end
     image: softy-pinko-front-end:task6
+    depends_on:
+      - back-end
+
+  proxy:
+    build: ./proxy
+    image: softy-pinko-proxy:task6
     ports:
       - "80:80"
     depends_on:
       - back-end
+      - front-server

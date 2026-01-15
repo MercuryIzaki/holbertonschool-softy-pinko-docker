@@ -1,0 +1,22 @@
+services:
+  api-server:
+    build:
+      context: ./back-end
+    image: softy-pinko-back-end:task5
+
+  front-server:
+    build:
+      context: ./front-end
+    image: softy-pinko-front-end:task5
+    depends_on:
+      - api-server
+
+  proxy:
+    build:
+      context: ./proxy
+    image: softy-pinko-proxy:task5
+    ports:
+      - "80:80"
+    depends_on:
+      - api-server
+      - front-server
