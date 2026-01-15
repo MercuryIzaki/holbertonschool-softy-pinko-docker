@@ -1,0 +1,13 @@
+services:
+  # Сервис бэкенда
+  api-server:
+    build: ./back-end
+    container_name: back-end # Имя, которое Nginx будет использовать для связи
+
+  # Сервис фронтенда
+  front-server:
+    build: ./front-end
+    ports:
+      - "9000:9000" # Проброс порта на хост-машину
+    depends_on:
+      - api-server
