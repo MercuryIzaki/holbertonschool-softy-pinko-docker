@@ -1,13 +1,14 @@
 services:
-  # Сервис бэкенда
+  # Наш API сервер
   api-server:
     build: ./back-end
-    container_name: back-end # Имя, которое Nginx будет использовать для связи
+    container_name: softy-pinko-back-end-task4
 
-  # Сервис фронтенда
+  # Наш веб-сервер Nginx
   front-server:
     build: ./front-end
+    container_name: softy-pinko-front-end-task4
     ports:
-      - "9000:9000" # Проброс порта на хост-машину
+      - "9000:9000"
     depends_on:
       - api-server
