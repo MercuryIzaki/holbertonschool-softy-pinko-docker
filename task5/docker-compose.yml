@@ -1,0 +1,12 @@
+services:
+  back-end:
+    build: ./back-end
+    container_name: softy-pinko-back-end-task5
+
+  front-end:
+    build: ./front-end
+    container_name: softy-pinko-front-end-task5
+    ports:
+      - "80:80"
+    depends_on:
+      - back-end
