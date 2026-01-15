@@ -1,14 +1,19 @@
 services:
-  # Наш API сервер
+  # Сервис бэкенда (Flask API)
   api-server:
-    build: ./back-end
-    container_name: softy-pinko-back-end-task4
+    build:
+      context: ./back-end
+      dockerfile: Dockerfile
+    image: softy-pinko-back-end:task4
+    # Порт бэкенда не пробрасываем на хост, так как доступ нужен только фронтенду внутри сети
 
-  # Наш веб-сервер Nginx
+  # Сервис фронтенда (Nginx)
   front-server:
-    build: ./front-end
-    container_name: softy-pinko-front-end-task4
+    build:
+      context: ./front-end
+      dockerfile: Dockerfile
+    image: softy-pinko-front-end:task4
     ports:
-      - "9000:9000"
+      - "9000:9000" # Маппинг HOST:CONTAINER
     depends_on:
-      - api-server
+      - api-server # Ждем запуска бэкенда перед стартом фронтенда
